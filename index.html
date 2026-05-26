@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -88,7 +87,6 @@ select:focus, input:focus {
 <div class="card" id="mainCard">
 
   <h1>💌 Hello Beautiful</h1>
-  <h2>I have a very serious question...</h2>
 
   <div id="step1">
     <p>I was wondering... are you free sometime soon for a proper date? 😏</p>
@@ -97,7 +95,7 @@ select:focus, input:focus {
   </div>
 
   <div id="step2" class="hidden">
-    <p>Great! That’s exactly what I wanted to hear. 😏</p>
+    <p>Great! That's exactly what I wanted to hear. 😏</p>
     <p>Now, tell me when your lovely self is available.</p>
 
     <input type="date" id="date_input" required>
@@ -120,7 +118,7 @@ select:focus, input:focus {
 
   <div id="step3" class="hidden">
     <p>Perfect. We have a date. 😌</p>
-    <p>Now, tell me where you’d like to be seen with me (Venue):</p>
+    <p>Now, tell me where you'd like to be seen with me (Venue):</p>
     <input type="text" id="venue_input" placeholder="e.g. Java House / CBD / Westlands" required>
     <button onclick="finish()">Finalize the Plan ❤️</button>
   </div>
@@ -161,7 +159,7 @@ function next() {
   let time = document.getElementById("time_input").value;
 
   if (!date || !day || !time) {
-    alert("Please don’t tease me! Select the full date, day, and time. 😉❤️");
+    alert("Please don't tease me! Select the full date, day, and time. 😉❤️");
     return;
   }
 
@@ -189,15 +187,13 @@ function finish() {
   let message = "Hey! I filled out the form. We are officially meeting on " + dateValue + " (" + dayValue + ") at " + venueValue + " at " + timeValue + " ❤️";
   let encodedMessage = encodeURIComponent(message);
   
-  let myPhoneNumber = "254755535343"; 
+  let myEmail = "frankbilly152@proton.me"; 
 
   setTimeout(function() {
-    window.location.href = "https://wa.me/" + myPhoneNumber + "?text=" + encodedMessage;
+    window.location.href = "mailto:" + myEmail + "?subject=Date Confirmed&body=" + encodedMessage;
   }, 2000);
 }
 </script>
 
 </body>
 </html>
-
-```
