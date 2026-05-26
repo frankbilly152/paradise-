@@ -1,0 +1,203 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Important Question ❤️</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  text-align: center;
+}
+
+.card {
+  background: white;
+  width: 90%;
+  max-width: 450px;
+  padding: 30px;
+  border-radius: 25px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+  position: relative;
+}
+
+h1 { color: #d00030; font-size: 28px; margin-bottom: 5px; }
+h2 { color: #333; font-size: 20px; font-weight: normal; margin-bottom: 25px; }
+p { font-size: 17px; color: #555; line-height: 1.5; margin-bottom: 20px; }
+
+button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 50px;
+  margin: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#yes { background: #ff4d6d; color: white; }
+#yes:hover { transform: scale(1.1); box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4); }
+
+#no {
+  background: #bbb;
+  color: white;
+  position: absolute;
+  transition: all 0.1s ease;
+}
+
+select, input {
+  padding: 12px;
+  width: 90%;
+  margin: 10px auto;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  font-size: 16px;
+  display: block;
+  background-color: #f9f9f9;
+  box-sizing: border-box;
+}
+
+select:focus, input:focus {
+  border-color: #ff4d6d;
+  outline: none;
+}
+
+.hidden { display: none !important; }
+
+#summary {
+  font-size: 19px;
+  color: #333;
+  margin: 25px 0;
+  border-top: 2px dashed #ff4d6d;
+  border-bottom: 2px dashed #ff4d6d;
+  padding: 15px 0;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card" id="mainCard">
+
+  <h1>💌 Hello Beautiful</h1>
+  <h2>I have a very serious question...</h2>
+
+  <div id="step1">
+    <p>I was wondering... are you free sometime soon for a proper date? 😏</p>
+    <button id="yes" onclick="yesStep()">Yes, absolutely! 💖</button>
+    <button id="no" onmouseover="moveNo()" onclick="moveNo()">No 🙈</button>
+  </div>
+
+  <div id="step2" class="hidden">
+    <p>Great! That’s exactly what I wanted to hear. 😏</p>
+    <p>Now, tell me when your lovely self is available.</p>
+
+    <input type="date" id="date_input" required>
+
+    <select id="day_input">
+      <option value="" disabled selected>Select the Day</option>
+      <option value="Monday">Monday</option>
+      <option value="Tuesday">Tuesday</option>
+      <option value="Wednesday">Wednesday</option>
+      <option value="Thursday">Thursday</option>
+      <option value="Friday">Friday</option>
+      <option value="Saturday">Saturday</option>
+      <option value="Sunday">Sunday</option>
+    </select>
+
+    <input type="time" id="time_input" required>
+
+    <button onclick="next()">Lock in the Time 😌</button>
+  </div>
+
+  <div id="step3" class="hidden">
+    <p>Perfect. We have a date. 😌</p>
+    <p>Now, tell me where you’d like to be seen with me (Venue):</p>
+    <input type="text" id="venue_input" placeholder="e.g. Java House / CBD / Westlands" required>
+    <button onclick="finish()">Finalize the Plan ❤️</button>
+  </div>
+
+  <div id="final" class="hidden">
+    <p id="summary"></p>
+    <h3>Okay… the deal is officially locked. 😌</h3>
+    <p>
+      I will meet you there at the exact time.<br>
+      No excuses, no refunds, and absolutely no escape plan. 😄❤️
+    </p>
+    <p><b>Goodbye… until we meet. 💌</b></p>
+  </div>
+
+</div>
+
+<script>
+function moveNo() {
+  let btn = document.getElementById("no");
+  let card = document.getElementById("mainCard");
+  let cardRect = card.getBoundingClientRect();
+
+  let x = Math.random() * (cardRect.width - btn.offsetWidth - 20) + 10;
+  let y = Math.random() * (cardRect.height - btn.offsetHeight - 50) + 10;
+
+  btn.style.left = x + "px";
+  btn.style.top = y + "px";
+}
+
+function yesStep() {
+  document.getElementById("step1").classList.add("hidden");
+  document.getElementById("step2").classList.remove("hidden");
+}
+
+function next() {
+  let date = document.getElementById("date_input").value;
+  let day = document.getElementById("day_input").value;
+  let time = document.getElementById("time_input").value;
+
+  if (!date || !day || !time) {
+    alert("Please don’t tease me! Select the full date, day, and time. 😉❤️");
+    return;
+  }
+
+  document.getElementById("step2").classList.add("hidden");
+  document.getElementById("step3").classList.remove("hidden");
+}
+
+function finish() {
+  let dateValue = document.getElementById("date_input").value;
+  let dayValue = document.getElementById("day_input").value;
+  let timeValue = document.getElementById("time_input").value;
+  let venueValue = document.getElementById("venue_input").value;
+
+  if (!venueValue) {
+    alert("Please tell me where to meet you! I don't want to get lost... ❤️");
+    return;
+  }
+
+  document.getElementById("step3").classList.add("hidden");
+  document.getElementById("final").classList.remove("hidden");
+
+  document.getElementById("summary").innerHTML =
+    "We are officially meeting on 📅 <b>" + dateValue + "</b> (" + dayValue + ") at 📍 <b>" + venueValue + "</b> at ⏰ <b>" + timeValue + "</b> ❤️";
+
+  let message = "Hey! I filled out the form. We are officially meeting on " + dateValue + " (" + dayValue + ") at " + venueValue + " at " + timeValue + " ❤️";
+  let encodedMessage = encodeURIComponent(message);
+  
+  let myPhoneNumber = "254755535343"; 
+
+  setTimeout(function() {
+    window.location.href = "https://wa.me/" + myPhoneNumber + "?text=" + encodedMessage;
+  }, 2000);
+}
+</script>
+
+</body>
+</html>
+
+```
